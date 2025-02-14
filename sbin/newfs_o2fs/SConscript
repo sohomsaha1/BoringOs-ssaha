@@ -1,0 +1,13 @@
+import sys
+
+# Import the hostenv that we will define in SConstruct
+Import('hostenv')
+
+src = [
+    "newfs_o2fs.c"
+]
+
+# Build newfs_o2fs with the host environment (native macOS compiler/linker)
+newfs_env = hostenv.Clone()
+newfs_env.Append(CPPPATH = ['#sys/fs/o2fs'])
+newfs_env.Program("newfs_o2fs", src)
